@@ -9,8 +9,7 @@ function timtreeTest(){
 function notifyTodayEvents() {
   var todayEvents = JSON.parse(timetreeGetUpcomingEventsByName(calendar_name)).data;
   var message = "今日の予定だよ!\n\n" + createMessage(todayEvents);
-  //sendMessageToLine(message);
-  Logger.log(message);
+  sendMessageToLine(message);
 }
 
 function createMessage(events) {
@@ -67,8 +66,7 @@ function timetreeGetCalendarIdByName(name) {
   });
   return calendar[0].id;
 }
-  
-// TimeTree APIをコールするメソッド
+
 function timetreeAPI(url, method, payload) {
  var accessToken = PropertiesService.getScriptProperties().getProperty('timetree_personal_access_token');
  var headers = {
