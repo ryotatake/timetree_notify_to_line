@@ -19,9 +19,9 @@ function timetreeGetCalendars() {
 
 function timetreeGetCalendarIdByName(name) {
   var response = timetreeGetCalendars();
-  var calendars = JSON.parse(response);
+  var calendars = JSON.parse(response).data;
   
-  var calendar = calendars.data.filter(function(data){
+  var calendar = calendars.filter(function(data){
     return data.attributes.name.toString() === name;
   });
   return calendar[0].id;
