@@ -1,4 +1,5 @@
 var calendar_name = PropertiesService.getScriptProperties().getProperty("calendar_name");
+var weekday = ["日", "月", "火", "水", "木", "金", "土"];
 
 // テスト用メソッド
 function timtreeTest(){
@@ -32,9 +33,9 @@ function createMessage(events) {
 
 function formatDate(date, allDay) {
   if (allDay) {
-    return Utilities.formatDate(date, 'JST', 'MM/dd');
+    return Utilities.formatDate(date, 'JST', 'MM/dd(' + weekday[date.getDay()] + ')');
   } else {
-    return Utilities.formatDate(date, 'JST', 'MM/dd HH:mm');
+    return Utilities.formatDate(date, 'JST', 'MM/dd(' + weekday[date.getDay()] + ') HH:mm');
   }
 }
 
