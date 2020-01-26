@@ -9,6 +9,7 @@ function timtreeTest(){
 function notifyTodayEvents() {
   var todayEvents = JSON.parse(timetreeGetUpcomingEventsByName(calendar_name)).data;
   var message = "今日の予定だよ!\n\n" + createMessage(todayEvents);
+
   sendMessageToLine(message);
   //Logger.log(message);
 }
@@ -18,7 +19,7 @@ function createMessage(events) {
   var eventsSize = events.length;
   
   if (eventsSize === 0) {
-    return message += "今日の予定はないよ";
+    return message += "予定はないよ"
   }
   
   events.forEach(function(event, index) {
