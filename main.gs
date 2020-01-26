@@ -2,22 +2,36 @@ var calendar_name = PropertiesService.getScriptProperties().getProperty("calenda
 
 // テスト用メソッド
 function timtreeTest(){
-  //Logger.log(timetreeGetUpcomingEventsByName(calendar_name));
-  //sendMessageToLine("テストだよ");
   notifyTodayEvents();
 }
 
 function notifyTodayEvents() {
   var todayEvents = JSON.parse(timetreeGetUpcomingEventsByName(calendar_name)).data;
-  Logger.log(createMessage(todayEvents));
+  var message = "今日の予定だよ!\n\n" + createMessage(todayEvents);
+  Logger.log(message);
 }
 
 function createMessage(events) {
   var message = '';
+  
   events.forEach(function(event) {
-    message += event.attributes.title;
+    var allDay = event.attributes.all_day;
+    var title = event.attributes.title;
+    var startAt = formatDate(new Date(event.attributes.start_at), allDay);
+    var endAt = formatDate(new Date(event.attributes.end_at), allDay);
+
+    message += startAt + ' - ' + endAt + "\n" + title + "\n\n";
   });
+  
   return message;
+}
+
+function formatDate(date, allDay) {
+  if (allDay) {
+    return Utilities.formatDate(date, 'JST', 'MM/dd');
+  } else {
+    return Utilities.formatDate(date, 'JST', 'MM/dd HH:mm');
+  }
 }
 
 function timetreeGetUpcomingEventsByName(name) {
