@@ -2,8 +2,22 @@ var calendar_name = PropertiesService.getScriptProperties().getProperty("calenda
 
 // テスト用メソッド
 function timtreeTest(){
-  Logger.log(timetreeGetUpcomingEventsByName(calendar_name));
+  //Logger.log(timetreeGetUpcomingEventsByName(calendar_name));
   //sendMessageToLine("テストだよ");
+  notifyTodayEvents();
+}
+
+function notifyTodayEvents() {
+  var todayEvents = JSON.parse(timetreeGetUpcomingEventsByName(calendar_name)).data;
+  Logger.log(createMessage(todayEvents));
+}
+
+function createMessage(events) {
+  var message = '';
+  events.forEach(function(event) {
+    message += event.attributes.title;
+  });
+  return message;
 }
 
 function timetreeGetUpcomingEventsByName(name) {
