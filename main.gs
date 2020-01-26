@@ -1,7 +1,9 @@
+var calendar_name = PropertiesService.getScriptProperties().getProperty("calendar_name");
+
 // テスト用メソッド
 function timtreeTest(){
-  Logger.log(timetreeGetUpcomingEventsByName("きつね"));
-  sendMessageToLine("テストだよ");
+  Logger.log(timetreeGetUpcomingEventsByName(calendar_name));
+  //sendMessageToLine("テストだよ");
 }
 
 function timetreeGetUpcomingEventsByName(name) {
