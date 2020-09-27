@@ -1,3 +1,4 @@
+// calendar_nameを上書きする場合は、PropertiesService.getScriptProperties().setProperty("calendar_name","xxx"); を実行する
 var calendar_name = PropertiesService.getScriptProperties().getProperty("calendar_name");
 var weekday = ["日", "月", "火", "水", "木", "金", "土"];
 
