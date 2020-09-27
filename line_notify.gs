@@ -7,14 +7,13 @@ function sendMessageToLine(message) {
 function lineNotifyAPI(url, method, payload){
   const accessToken = PropertiesService.getScriptProperties().getProperty('line_notify_access_token');
   const headers = {
-   'Authorization': 'Bearer '+ accessToken
+  　'Authorization': 'Bearer '+ accessToken
   };
-  const options =
-   {
-     "method"  : method,
-     "headers" : headers,
-     "payload" : payload
-   };
+  const options = {
+    "method"  : method,
+    "headers" : headers,
+    "payload" : payload
+  };
 
    return UrlFetchApp.fetch(url, options);
 }
