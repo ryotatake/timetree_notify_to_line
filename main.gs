@@ -1,6 +1,6 @@
 // calendar_nameを上書きする場合は、PropertiesService.getScriptProperties().setProperty("calendar_name","xxx"); を実行する
-var calendar_name = PropertiesService.getScriptProperties().getProperty("calendar_name");
-var weekday = ["日", "月", "火", "水", "木", "金", "土"];
+const calendar_name = PropertiesService.getScriptProperties().getProperty("calendar_name");
+const weekday = ["日", "月", "火", "水", "木", "金", "土"];
 
 // テスト用メソッド
 function timtreeTest(){
@@ -8,26 +8,26 @@ function timtreeTest(){
 }
 
 function notifyTodayEvents() {
-  var todayEvents = JSON.parse(timetreeGetUpcomingEventsByName(calendar_name)).data;
-  var message = "今日の予定だよ!\n\n" + createMessage(todayEvents);
+  const todayEvents = JSON.parse(timetreeGetUpcomingEventsByName(calendar_name)).data;
+  const message = "今日の予定だよ!\n\n" + createMessage(todayEvents);
 
   sendMessageToLine(message);
   //Logger.log(message);
 }
 
 function createMessage(events) {
-  var message = '';
-  var eventsSize = events.length;
+  let message = '';
+  const eventsSize = events.length;
   
   if (eventsSize === 0) {
     return message += "予定はないよ"
   }
   
   events.forEach(function(event, index) {
-    var allDay = event.attributes.all_day;
-    var title = event.attributes.title;
-    var startAt = formatDate(new Date(event.attributes.start_at), allDay);
-    var endAt = formatDate(new Date(event.attributes.end_at), allDay);
+    const allDay = event.attributes.all_day;
+    const title = event.attributes.title;
+    const startAt = formatDate(new Date(event.attributes.start_at), allDay);
+    const endAt = formatDate(new Date(event.attributes.end_at), allDay);
 
     message += startAt + ' - ' + endAt + "\n" + title;
     

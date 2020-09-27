@@ -1,43 +1,43 @@
 function timetreeGetUpcomingEventsByName(name) {
-  var id = timetreeGetCalendarIdByName(name);
+  const id = timetreeGetCalendarIdByName(name);
   return timetreeGetUpcomingEvents(id);
 }
 
 function timetreeGetUpcomingEvents(id) {
-  var url = 'https://timetreeapis.com/calendars/' + id + '/upcoming_events?timezone=Asia/Tokyo';
-  var method = 'GET'; 
-  var payload = '';
+  const url = 'https://timetreeapis.com/calendars/' + id + '/upcoming_events?timezone=Asia/Tokyo';
+  const method = 'GET'; 
+  const payload = '';
   return timetreeAPI(url, method, payload);
 }
 
 function timetreeGetCalendars() {
-  var url = 'https://timetreeapis.com/calendars';
-  var method = 'GET';
-  var payload = '';
+  const url = 'https://timetreeapis.com/calendars';
+  const method = 'GET';
+  const payload = '';
   return timetreeAPI(url, method, payload);
 }
 
 function timetreeGetCalendarIdByName(name) {
-  var response = timetreeGetCalendars();
-  var calendars = JSON.parse(response).data;
+  const response = timetreeGetCalendars();
+  const calendars = JSON.parse(response).data;
   
-  var calendar = calendars.filter(function(data){
+  const calendar = calendars.filter(function(data){
     return data.attributes.name.toString() === name;
   });
   return calendar[0].id;
 }
 
 function timetreeAPI(url, method, payload) {
- var accessToken = PropertiesService.getScriptProperties().getProperty('timetree_personal_access_token');
- var headers = {
+ const accessToken = PropertiesService.getScriptProperties().getProperty('timetree_personal_access_token');
+ const headers = {
    'Authorization': 'Bearer '+ accessToken
  };
- var options = {
+ const options = {
    'method': method,
    'headers': headers,
    'payload': payload
  };
  
- var response = UrlFetchApp.fetch(url, options);
+ const response = UrlFetchApp.fetch(url, options);
  return response;
 }

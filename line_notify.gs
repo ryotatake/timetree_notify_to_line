@@ -1,15 +1,15 @@
 function sendMessageToLine(message) {
-  var url = 'https://notify-api.line.me/api/notify';
-  var payload = "message=" + message;
+  const url = 'https://notify-api.line.me/api/notify';
+  const payload = "message=" + message;
   lineNotifyAPI(url, 'post', payload);
 }
 
 function lineNotifyAPI(url, method, payload){
-  var accessToken = PropertiesService.getScriptProperties().getProperty('line_notify_access_token');
-  var headers = {
+  const accessToken = PropertiesService.getScriptProperties().getProperty('line_notify_access_token');
+  const headers = {
    'Authorization': 'Bearer '+ accessToken
   };
-  var options =
+  const options =
    {
      "method"  : method,
      "headers" : headers,
